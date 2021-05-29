@@ -1,0 +1,505 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+:root {
+    --priCol: #4a4a4a;
+    --accCol: #2a98bb;
+    --fontcolor: #101010;
+    --fontcolorLight1: gray;
+    --fontfamily: 'Asap';
+    --headerHeight: 800px;
+    --basicFontSize: 1.2rem;
+    --ezCol: rgb(109,72,121);
+    --ezColLight: rgb(177,128,194)
+}
+/*#region Default App and Header Tab */
+.App {
+    color: var(--priCol);
+    font-family: var(--fontfamily);
+}
+
+.headerTab {
+    position: sticky;
+    background-color: var(--ezCol);
+    top: 0;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    vertical-align: central;
+    z-index: 20;
+}
+
+.headerTabBig {
+    position: sticky;
+    top: 0;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    box-shadow: 0px 0px 12px 3px rgba(0,0,0,0.53);
+    -webkit-box-shadow: 0px 0px 12px 3px rgba(0,0,0,0.53);
+    background-color: var(--ezCol);
+    z-index: 20
+}
+/*#endregion */
+/*#region Navigation */
+.rocNav {
+    color: white;
+    padding: 10px;
+    text-align: center
+}
+
+    .rocNav:hover {
+        text-decoration: underline;
+        color: white
+    }
+
+    .rocNav:focus {
+        text-decoration: underline;
+        color: white
+    }
+
+    .rocNav.disabled {
+        color: #6c757d
+    }
+/*#endregion */
+/*#region Alpha */
+.lowalpha {
+    opacity: 0.8
+}
+
+.xlowalpha {
+    opacity: 0.8
+}
+
+.xxlowalpha {
+    opacity: 0.4
+}
+/*#endregion */
+/*#region Fonts */
+.title {
+    font-size: calc(var(--basicFontSize)*3);
+}
+
+.whitecolor {
+    color: white
+}
+
+.primcolor {
+    color: var(--ezCol)
+}
+
+
+.stitle {
+    font-size: calc(var(--basicFontSize)*2);
+}
+
+.sstitle {
+    font-size: calc(var(--basicFontSize)*1.5);
+}
+
+.ssstitle {
+    font-size: calc(var(--basicFontSize)*1.1);
+}
+
+.bold {
+    font-weight: bold
+}
+
+
+
+.remarks {
+    font-size: calc(var(--basicFontSize)*0.8);
+}
+
+
+.floRig {
+    float: right;
+}
+
+.minheig80 {
+    min-height: 80vh;
+}
+
+
+
+/*#endregion */
+/*#region Media Screens*/
+/*Min-width: 320px (smaller phone viewpoints)
+Min-width: 480px (small devices and most phones)
+Min-width: 768px (most tablets)
+Min-width: 992px (smaller desktop viewpoints)
+Min-width: 1200px (large devices and wide screens)
+*/
+@media screen and (min-width: 0px) {
+    .screensize {
+        background-color: red;
+    }
+
+    .logosize {
+        width: 2em;
+        height: 2em;
+    }
+
+    .handsmobile {
+        width: 45%;
+        float: right;
+        position: absolute;
+        right: 5%;
+        bottom: 0
+    }
+
+    .headersize {
+        font-size: calc(var(--basicFontSize)*0.7);
+    }
+
+    .handvisible {
+        visibility: collapse;
+    }
+
+    .mainImgOverlSize {
+        font-size: calc(var(--basicFontSize)*1.6);
+        font-weight: bold;
+    }
+
+    .mainImgOverlSSize {
+        font-size: calc(var(--basicFontSize)*0.7);
+    }
+}
+
+@media screen and (min-width: 320px) {
+    .screensize {
+        background-color: green;
+    }
+
+    .logosize {
+        width: 2em;
+        height: 2em;
+    }
+
+    .headersize {
+        font-size: calc(var(--basicFontSize)*1);
+    }
+
+    .mainImgOverlSize {
+        font-size: calc(var(--basicFontSize)*2);
+        font-weight: bold;
+    }
+
+    .mainImgOverlSSize {
+        font-size: calc(var(--basicFontSize)*1);
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .screensize {
+        background-color: blue;
+    }
+
+    .logosize {
+        width: 3em;
+        height: 3em;
+    }
+
+    .headImagemargin {
+        margin-right: 10px;
+        margin-left: 5px;
+    }
+
+    .headersize {
+        font-size: calc(var(--basicFontSize)*1.5)
+    }
+
+    .mainImgOverlSize {
+        font-size: calc(var(--basicFontSize)*2);
+        font-weight: bold;
+    }
+
+    .mainImgOverlSSize {
+        font-size: calc(var(--basicFontSize)*1);
+    }
+
+
+    .mainImgOverlmargin {
+        margin-left: 10%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .screensize {
+        background-color: orange;
+    }
+
+    .logosize {
+        width: 4em;
+        height: 4em;
+    }
+
+    .headImagemargin {
+        margin-right: 30px;
+        margin-left: 30px;
+    }
+
+    .headersize {
+        font-size: calc(var(--basicFontSize)*2)
+    }
+
+    .mainImgOverlSize {
+        font-size: calc(var(--basicFontSize)*2.5);
+        font-weight: bold;
+    }
+
+    .mainImgOverlmargin {
+        margin-left: 15%;
+    }
+
+    .mainImgOverlSSize {
+        font-size: calc(var(--basicFontSize)*1.5);
+    }
+
+    .handvisible {
+        visibility: visible;
+    }
+}
+
+@media screen and (min-width: 992px) {
+
+    .screensize {
+        background-color: yellow;
+    }
+
+    .mainImgOverlSize {
+        font-size: calc(var(--basicFontSize)*3);
+        font-weight: bold;
+    }
+
+    .mainImgOverlSSize {
+        font-size: calc(var(--basicFontSize)*1.5);
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .mainimageFooterouter {
+        visibility: collapse;
+        height: 0
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .mainimageFooter {
+        visibility: collapse
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .screensize {
+        background-color: mediumpurple;
+    }
+}
+
+
+
+.main3boxes {
+    background-color: rgba(0, 0, 0, 0.8);
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    position: absolute;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.main3boxesout {
+    background-color: var(--priCol);
+    left: 0;
+    right: 0;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.middleof3boxesborders {
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-color: gray;
+}
+
+.main3boxescontent.title {
+    color: var(--ezCol);
+    font-size: 0.9rem;
+    font-weight: bold
+}
+
+.main3boxescontent.text {
+    color: white;
+    font-size: 0.7rem;
+    margin: 0
+}
+
+.main3boxescontent.svg {
+    width: 30px;
+    height: 20px;
+}
+
+.whitesvg {
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    filter: invert(100%) sepia(0%) saturate(4515%) hue-rotate(83deg) brightness(123%) contrast(110%);
+}
+
+.escolorsvg {
+    filter: invert(30%) sepia(42%) saturate(574%) hue-rotate(240deg) brightness(92%) contrast(86%);
+}
+
+.whiteBorderBtn {
+    border-width: 2px;
+    border-radius: 8px 25px;
+    border-style: solid;
+    padding: 15px;
+    border-color: white;
+}
+
+.whiteBorderroundedBtn {
+    border-width: 2px;
+    height: 3em;
+    border-radius: 1.5em;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-color: white;
+    cursor: pointer;
+}
+
+    .whiteBorderroundedBtn.wb {
+        background-color: white;
+        color: var(--ezCol)
+    }
+/*#endregion*/
+/*#region Components*/
+.paragraph {
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.flexrow {
+    display: flex;
+    flex-direction: row;
+}
+
+    .flexrow.spacearround {
+        justify-content: space-around
+    }
+
+    .flexrow.spacebetween {
+        justify-content: space-between
+    }
+    .flexrow.end {
+        justify-content: flex-end
+    }
+    .flexrow.wrap {
+        flex-wrap: wrap
+    }
+    
+.flexcolumn {
+    display:flex;
+    flex-direction:column;
+}
+    .flexcolumn.spacearround {
+        justify-content: space-around
+    }
+.mainboxes {
+    background-color: rgba(0, 0, 0,0.4);
+    color: white;
+    border-right-width: 1px;
+    border-right-color: rgba(0, 0, 0, 0.1);
+    border-right-style: solid;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    justify-content: center;
+}
+
+.Card {
+    padding: 1em;
+    background-color: white;
+    border-radius: 10px;
+    color: black
+}
+.circleImage {
+    background-color:white;
+    border-style:solid;
+    border-width:3px;
+    border-color:var(--ezCol);
+    border-radius:100%;
+    object-fit:contain;
+    width:64px;
+    height:64px;
+    padding:10px;
+
+}
+/*#endregion*/
+
+
+/*#region Components*/
+/*#endregion*/
+
+
+/*#region Debug */
+.cprim {
+    background-color: var(--ezCol)
+}
+.cprimlight {
+    background-color: var(--ezColLight)
+}
+
+.cr {
+    background-color: red
+}
+
+.cb {
+    background-color: blue
+}
+
+.cbe {
+    background-color: beige
+}
+
+.colSupLigGra {
+    background-color: #f3f3f3
+}
+/*#endregion */
+
+/*#region PercentageScreens */
+
+
+/*#endregion */
+/*#region gradient Container*/
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 80%;
+}
+
+.imagecontent {
+    vertical-align: middle;
+    background: white;
+    object-fit: none
+}
+
+.overlay-desc {
+    background: rgba(0, 0, 0, 0.60);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%
+}
+/*#endregion */

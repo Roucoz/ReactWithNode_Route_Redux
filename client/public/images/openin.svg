@@ -1,0 +1,14 @@
+<svg width="295" height="150" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <defs>
+  <filter id="svg_1_blur">
+   <feGaussianBlur stdDeviation="0" in="SourceGraphic"/>
+  </filter>
+ </defs>
+ <g id="Layer_1">
+  <title>Layer 1</title>
+  <rect stroke="#6d4879" filter="url(#svg_1_blur)" id="svg_1" height="106" width="269" y="31" x="20" fill="#6d4879"/>
+  <line stroke="#6d4879" stroke-width="37" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_5" y2="20" x2="90" y1="55" x1="142" fill="none"/>
+  <rect stroke="#b180c2" id="svg_8" height="44" width="26" y="23" x="57" fill-opacity="null" stroke-dasharray="null" stroke-width="37" fill="none"/>
+ </g>
+</svg>
