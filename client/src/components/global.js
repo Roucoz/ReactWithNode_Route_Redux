@@ -1,8 +1,11 @@
 import '../styles/glob.css';
+import { createBrowserHistory } from 'history';
 const nodeServerSite = 'http://localhost:5000/'
 
 //#region Constants
 export const userType = ['Mall Admin', 'Super User', 'Customer']
+export const sessionStorageVariables = { userData: 'UserData' }
+export const history = createBrowserHistory();
 //#end region
 
 

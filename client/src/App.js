@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Container, Row } from 'react-bootstrap';
+
 import SignInForm from './pages/SignInForm';
+import MainContent from './pages/mainContent';
+import NotFound from './pages/NotFound';
+import { PrivateRoute } from './pages/privateRoute';
+
 import './styles/glob.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -10,6 +15,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { _reducersActions as _RA } from './components/_redux/constants';
 import { connect } from 'react-redux';
 import * as G from './components/global';
+import { history } from './components/global';
+
+
 //#endregion
 
 class App extends Component {
@@ -42,21 +50,16 @@ class App extends Component {
 
 	//#endregion
 
-	signIn = async () => {
-		var user = 'roucoz';
-		var result = await G.getdatawithWait('PostUsers', [['code', user]])//.then((result) => { console.log(result.recordset) });
-		this.setState({ data: result.length < 1 ? 'The User ' + user + ' does not exist!' : 'Welcome ' + result[0].name })
-		G.log(result)
-	}
+
 	render() {
 		return (
 
 
-			<div className="App" >
+			<div className="App " >
 
-				<Router  >
-					<div className='headerTabBig whitecolor title center'>This is the header</div>
-
+				<Router history={G.history}  >
+					<div className='headerTabBig  title text-center'>This is the header</div>
+					{this.props.userLogin !== undefined && <div>User : {this.props.userLogin.name}</div>}
 					{1 === 2 && <div style={{ textAlign: "center", padding: 20 }}>
 						<div>Age:<span>{this.props.age}</span></div>
 
@@ -71,14 +74,16 @@ class App extends Component {
 						</div>
 					</div>
 					}
+					<button onClick={()=>history.push("/")}>redirect</button>
 
-					<button onClick={this.signIn} >Get Data</button>
-					{this.state.data}
-					<Container fluid className='minheig80 mb-2 body lowerindex ' >
+					<Container className='minheig80 mb-2' >
 						<Row >
-							<Route path="/" exact render={() => <SignInForm />} />
-							<Route path="/findamarket" exact render={() => { return <div>Second Page</div> }} />
-
+							<Switch>
+								
+								<PrivateRoute path="/" exact component={MainContent} />
+								<Route path="/SignIn" exact component={SignInForm } />
+								<Route component={NotFound} />
+							</Switch>
 						</Row>
 					</Container>
 					<div>Footer</div>
@@ -102,7 +107,8 @@ const mapDispachToProps = dispatch => {
 const mapStateToProps = state => {
 	return {
 		age: state.counterAge.age,
-		weight: state.counterWeight.weight
+		weight: state.counterWeight.weight,
+		userLogin: state.SaveLogin.userData,
 	};
 };
 
