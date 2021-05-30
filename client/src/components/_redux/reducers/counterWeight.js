@@ -7,14 +7,15 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     const newState = { ...state };
-
+	//console.log('old Weight: ' ,newState)
     if (action.type === _RA.counterWeight.onWeightUp) {
-        newState.weight = newState.weight + action.value;
+        newState.weight = newState.weight + action.value ;
     }
-    if (action.type === _RA.counterWeight.counterWeightDown) {
+    if (action.type === _RA.counterWeight.onWeightDown) {
         //newState.age--;
-        newState.weight = newState.weight - action.value;
-    }
+        newState.weight = newState.weight - action.value ;
+	}
+	//console.log('new Weight:',newState)
     return newState;
 }
 
