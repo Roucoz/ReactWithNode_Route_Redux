@@ -11,7 +11,8 @@
     --headerHeight: 800px;
     --basicFontSize: 1.2rem;
     --ezCol: rgb(109,72,121);
-    --ezColLight: rgb(177,128,194)
+    --ezColLight: rgb(177,128,194);
+    --errorColor : #ea0505
 }
 /*#region Default App and Header Tab */
 .App {
@@ -19,26 +20,6 @@
     font-family: var(--fontfamily);
 }
 
-.headerTab {
-    position: sticky;
-    background-color: var(--ezCol);
-    top: 0;
-    -webkit-transition: all 0.4s ease;
-    transition: all 0.4s ease;
-    vertical-align: central;
-    z-index: 20;
-}
-
-.headerTabBig {
-    position: sticky;
-    top: 0;
-    -webkit-transition: all 0.4s ease;
-    transition: all 0.4s ease;
-    box-shadow: 0px 0px 12px 3px rgba(0,0,0,0.53);
-    -webkit-box-shadow: 0px 0px 12px 3px rgba(0,0,0,0.53);
-    background-color: var(--ezCol);
-    z-index: 20
-}
 /*#endregion */
 /*#region Navigation */
 .rocNav {
@@ -66,10 +47,6 @@
     opacity: 0.8
 }
 
-.xlowalpha {
-    opacity: 0.8
-}
-
 .xxlowalpha {
     opacity: 0.4
 }
@@ -78,15 +55,6 @@
 .title {
     font-size: calc(var(--basicFontSize)*3);
 }
-
-.whitecolor {
-    color: white
-}
-
-.primcolor {
-    color: var(--ezCol)
-}
-
 
 .stitle {
     font-size: calc(var(--basicFontSize)*2);
@@ -104,7 +72,13 @@
     font-weight: bold
 }
 
+.whitecolor {
+    color: white
+}
 
+.primcolor {
+    color: var(--ezCol)
+}
 
 .remarks {
     font-size: calc(var(--basicFontSize)*0.8);
@@ -169,57 +143,11 @@ Min-width: 1200px (large devices and wide screens)
     .screensize {
         background-color: green;
     }
-
-    .logosize {
-        width: 2em;
-        height: 2em;
-    }
-
-    .headersize {
-        font-size: calc(var(--basicFontSize)*1);
-    }
-
-    .mainImgOverlSize {
-        font-size: calc(var(--basicFontSize)*2);
-        font-weight: bold;
-    }
-
-    .mainImgOverlSSize {
-        font-size: calc(var(--basicFontSize)*1);
-    }
 }
 
 @media screen and (min-width: 480px) {
     .screensize {
         background-color: blue;
-    }
-
-    .logosize {
-        width: 3em;
-        height: 3em;
-    }
-
-    .headImagemargin {
-        margin-right: 10px;
-        margin-left: 5px;
-    }
-
-    .headersize {
-        font-size: calc(var(--basicFontSize)*1.5)
-    }
-
-    .mainImgOverlSize {
-        font-size: calc(var(--basicFontSize)*2);
-        font-weight: bold;
-    }
-
-    .mainImgOverlSSize {
-        font-size: calc(var(--basicFontSize)*1);
-    }
-
-
-    .mainImgOverlmargin {
-        margin-left: 10%;
     }
 }
 
@@ -265,15 +193,6 @@ Min-width: 1200px (large devices and wide screens)
     .screensize {
         background-color: yellow;
     }
-
-    .mainImgOverlSize {
-        font-size: calc(var(--basicFontSize)*3);
-        font-weight: bold;
-    }
-
-    .mainImgOverlSSize {
-        font-size: calc(var(--basicFontSize)*1.5);
-    }
 }
 
 @media screen and (min-width: 1100px) {
@@ -297,50 +216,6 @@ Min-width: 1200px (large devices and wide screens)
 
 
 
-.main3boxes {
-    background-color: rgba(0, 0, 0, 0.8);
-    bottom: 0px;
-    left: 0;
-    right: 0;
-    position: absolute;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.main3boxesout {
-    background-color: var(--priCol);
-    left: 0;
-    right: 0;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.middleof3boxesborders {
-    border-left-style: solid;
-    border-left-width: 1px;
-    border-color: gray;
-}
-
-.main3boxescontent.title {
-    color: var(--ezCol);
-    font-size: 0.9rem;
-    font-weight: bold
-}
-
-.main3boxescontent.text {
-    color: white;
-    font-size: 0.7rem;
-    margin: 0
-}
-
-.main3boxescontent.svg {
-    width: 30px;
-    height: 20px;
-}
 
 .whitesvg {
     width: 30px;
@@ -349,40 +224,10 @@ Min-width: 1200px (large devices and wide screens)
     filter: invert(100%) sepia(0%) saturate(4515%) hue-rotate(83deg) brightness(123%) contrast(110%);
 }
 
-.escolorsvg {
-    filter: invert(30%) sepia(42%) saturate(574%) hue-rotate(240deg) brightness(92%) contrast(86%);
-}
 
-.whiteBorderBtn {
-    border-width: 2px;
-    border-radius: 8px 25px;
-    border-style: solid;
-    padding: 15px;
-    border-color: white;
-}
-
-.whiteBorderroundedBtn {
-    border-width: 2px;
-    height: 3em;
-    border-radius: 1.5em;
-    border-style: solid;
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    border-color: white;
-    cursor: pointer;
-}
-
-    .whiteBorderroundedBtn.wb {
-        background-color: white;
-        color: var(--ezCol)
-    }
 /*#endregion*/
 /*#region Components*/
-.paragraph {
-    margin-bottom: 15px;
-    text-align: justify;
-}
+
 
 .flexrow {
     display: flex;
@@ -396,32 +241,23 @@ Min-width: 1200px (large devices and wide screens)
     .flexrow.spacebetween {
         justify-content: space-between
     }
+
     .flexrow.end {
         justify-content: flex-end
     }
+
     .flexrow.wrap {
         flex-wrap: wrap
     }
-    
+
 .flexcolumn {
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
 }
+
     .flexcolumn.spacearround {
         justify-content: space-around
     }
-.mainboxes {
-    background-color: rgba(0, 0, 0,0.4);
-    color: white;
-    border-right-width: 1px;
-    border-right-color: rgba(0, 0, 0, 0.1);
-    border-right-style: solid;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    font-weight: bold;
-    justify-content: center;
-}
 
 .Card {
     padding: 1em;
@@ -429,22 +265,32 @@ Min-width: 1200px (large devices and wide screens)
     border-radius: 10px;
     color: black
 }
-.circleImage {
-    background-color:white;
-    border-style:solid;
-    border-width:3px;
-    border-color:var(--ezCol);
-    border-radius:100%;
-    object-fit:contain;
-    width:64px;
-    height:64px;
-    padding:10px;
 
+.circleImage {
+    background-color: white;
+    border-style: solid;
+    border-width: 3px;
+    border-color: var(--ezCol);
+    border-radius: 100%;
+    object-fit: contain;
+    width: 64px;
+    height: 64px;
+    padding: 10px;
 }
 /*#endregion*/
 
-
-/*#region Components*/
+/*#region form Controls*/
+.formGroup {
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin-bottom: 15px
+}
+.inputTextError {
+    border-color:var(--errorColor)
+}
+.formValidation {
+    color: var(--errorColor)
+}
 /*#endregion*/
 
 
@@ -452,6 +298,7 @@ Min-width: 1200px (large devices and wide screens)
 .cprim {
     background-color: var(--ezCol)
 }
+
 .cprimlight {
     background-color: var(--ezColLight)
 }
@@ -473,33 +320,4 @@ Min-width: 1200px (large devices and wide screens)
 }
 /*#endregion */
 
-/*#region PercentageScreens */
 
-
-/*#endregion */
-/*#region gradient Container*/
-.image-container {
-    position: relative;
-    width: 100%;
-    height: 80%;
-}
-
-.imagecontent {
-    vertical-align: middle;
-    background: white;
-    object-fit: none
-}
-
-.overlay-desc {
-    background: rgba(0, 0, 0, 0.60);
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%
-}
-/*#endregion */
