@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Container } from 'react-bootstrap';
+import {  Container } from 'react-bootstrap';
 import '../styles/glob.css'
 import * as G from '../components/global'
 import history from '../components/history'
@@ -17,27 +17,21 @@ class listAllUsers extends Component {
     componentDidMount = async () => {
         if (!G.checkUserAccess()) {
             alert('You cannot access this page!');
-            history.push("\SignIn");
+            history.push("/SignIn");
             return
         }
         console.log(sessionStorage.getItem('UserData'))
         
-        const result = await G.getdatawithresponse("getUsers", [], JSON.parse(sessionStorage.getItem('UserData')).Token)
-        console.log('roucoz data: ', result.data)
-        console.log('roucoz status: ', result.status)
-        //this.setState({result:result.data})
-        return
-
-
-        if (result.response.status === 403 || result.response.status === 401) {
+        const result = await G.getData("getUsers", [], JSON.parse(sessionStorage.getItem('UserData')).Token)
+        
+		if (result.status === 403 || result.status === 401) {
             alert("You do not have access for this page. Please log out")
-            console.log("You do not have access for this page. Please log out")
         } else {
-            let data = result.response.json()
-            console.log(data.promise.data.PromiseResult)
-            //this.setState({ result: result.response.json() })
+			console.log('roucoz status: ', result.status)
+			this.setState({ result: await result.data })
+			console.log('my data:', this.state.result)
         }
-        //this.setState({ result: usersArray})
+        
         
     }
    
@@ -46,11 +40,11 @@ class listAllUsers extends Component {
             <div style={{ width: '100%', display: "flex", justifyContent: "center" }}>
                 <Container className=' p-5 m-5 col-md-6 '>
                     <h1 className='bold title'>Login</h1>
+					
                     
-                    
-                    {this.state.result.map(() => {
-
-                        <div> roucoz</div>
+                    {this.state.result.map((user) => {
+						return (
+							<div key={user.id}>{user.name} | Code : {user.code}</div>)
                     }
                     )}
                     

@@ -22,33 +22,33 @@ class registerNewUser extends Component {
         this.setState({ fields });
     }
     handleValidation = async () => {
-        let fields = this.state.fields;
-        let errors = {};
-        let formIsValid = true;
+    //    let fields = this.state.fields;
+    //    let errors = {};
+    //    let formIsValid = true;
 
-        //Name
-        if (!fields["name"]) {
-            formIsValid = false;
-            errors["name"] = "Cannot be empty";
-        }
-        //Password
-        if (!fields["password"]) {
-            formIsValid = false;
-            errors["password"] = "Cannot be empty";
-        }
-        this.setState({ errors: errors });
-    }
-    signInSubmit = async (e) => {
-        e.preventDefault();
-        if (this.handleValidation()) {
-            ///valiate
-        }
+    //    //Name
+    //    if (!fields["name"]) {
+    //        formIsValid = false;
+    //        errors["name"] = "Cannot be empty";
+    //    }
+    //    //Password
+    //    if (!fields["password"]) {
+    //        formIsValid = false;
+    //        errors["password"] = "Cannot be empty";
+    //    }
+    //    this.setState({ errors: errors });
+    //}
+    //signInSubmit = async (e) => {
+    //    e.preventDefault();
+    //    if (this.handleValidation()) {
+    //        ///valiate
+    //    }
 
     }
     //#endregion
 
     render() {
-        const { errors, fields } = this.state;
+        const { errors } = this.state;
 
         console.log(this.state.fields)
 

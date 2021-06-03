@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Button, Container, Form, Col } from 'react-bootstrap';
 import '../styles/glob.css'
 import * as G from '../components/global';
-import { country_list as CTRY } from '../components/constants';
+//import { country_list as CTRY } from '../components/constants';
 import { connect } from 'react-redux';
 
 
-const listOfFields = "Name,Store,City,Address 1,Address 2,Contact Person,Phone,Mobile";
+
 
 
 class regitrationRequest extends Component {
@@ -31,7 +31,7 @@ class regitrationRequest extends Component {
         this.setState({ fields });
     }
     handleValidation = async () => {
-        const { email, storename, city, address, additionaladdresdetails, contactperson, phone, mobile } = this.state.fields;
+        const { email, storename, city, address, contactperson, phone, mobile } = this.state.fields;
         let errors = {};
         let formIsValid = true;
 
@@ -45,25 +45,24 @@ class regitrationRequest extends Component {
         if (!contactperson) { formIsValid = false; errors["contactperson"] = "Contact Person name cannot be empty"; }
         if (!phone && !mobile) { formIsValid = false; errors["phone"] = "You have to set at lease one phone number"; }
         this.setState({ errors: errors });
-        if (formIsValid) {
-            G.log('Form is valid. pushing now values...')
-            var result = await G.getdatawithWait('registerUser',
-                [
-                    ['code', this.state.fields['email']],
-                    ['storeName', this.state.fields['storename']],
-                    ['city', this.state.fields['city']],
-                    ['address', this.state.fields['address']],
-                    ['addAddress', this.state.fields['additionaladdresdetails']],
-                    ['contactPerson', this.state.fields['contactperson']],
-                    ['phone', this.state.fields['phone']],
-                    ['mobile', this.state.fields['mobile']],
-                    ['log','']
-                ]
-               
-            )
-            G.log("Result", result)
-            this.setState({ result: result })
-            return formIsValid;
+		if (formIsValid) {
+			G.log('Form is valid. pushing now values...')
+			var result = await G.getData('registerUser',
+				[
+					['code', this.state.fields['email']],
+					['storeName', this.state.fields['storename']],
+					['city', this.state.fields['city']],
+					['address', this.state.fields['address']],
+					['addAddress', this.state.fields['additionaladdresdetails']],
+					['contactPerson', this.state.fields['contactperson']],
+					['phone', this.state.fields['phone']],
+					['mobile', this.state.fields['mobile']],
+					['log', '']
+				]
+
+			)
+			if (result.status === 200) { this.setState({ result: await result.data }) } else { formIsValid = false }
+			return formIsValid;
         }
         else {
             return formIsValid;
