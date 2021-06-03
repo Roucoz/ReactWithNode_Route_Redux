@@ -1,51 +1,119 @@
 import '../styles/glob.css';
-import { createBrowserHistory } from 'history';
-const nodeServerSite = 'http://localhost:5000/'
+import { Form, Image } from 'react-bootstrap';
+
+
+
+const nodeServerSite = 'http://localhost:5000/';
+
 
 //#region Constants
 export const userType = ['Mall Admin', 'Super User', 'Customer']
 export const sessionStorageVariables = { userData: 'UserData' }
-export const history = createBrowserHistory();
+export const errorColor = '#ea0505'
 //#end region
 
 
-
+//#region Distinct Functions
 export const log = (a, b) => {
-	console.log(a, b!==undefined?b:'');
+    console.log(a, b !== undefined ? b : '');
 }
+export const isValideEmail = (mail) => {
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail)) {
+        return (true)
+    }
+    return (false)
+}
+export const checkUserAccess = () => {
+    if (!JSON.parse(sessionStorage.getItem('UserData'))) { return false }
 
-
-
+    if (!JSON.parse(sessionStorage.getItem('UserData')).Token) { return false }
+    if (JSON.parse(sessionStorage.getItem('UserData')).Token === "") { return false }
+    return true
+}
+///loop over object Object.keys(obj).forEach(function(key) {console.log(key, obj[key]);});
+//#endregion
 
 //#region getData 
 
-export async function getdatawithWait( servicename, params,  log = false) {
-	//how to use it
-	//var deetee = await G.getdatawithWait( 'getlogin', [['username', 'roucoz'], ['password', 'cl@r@']], true);
-	
-	var bodies = ""
-	for (var i = 0; i < params.length; i++) {
-		bodies += '&' + params[i][0] + '=' + (params[i][1] === "" ? "" : params[i][1])
+export async function getdatawithWait(servicename, params, Token = '', logs = false) {
+    //how to use it
+    //var deetee = await G.getdatawithWait( 'getlogin', [['username', 'roucoz'], ['password', 'cl@r@']], true);
 
-	}
-	if (bodies.length > 2) bodies = bodies.substring(1);
-	if (log) log('Bodies', bodies);
-	const link = nodeServerSite + servicename + "/"
-	if (log) log('link', link);
-	if (log) log('full path', link + '?' + bodies);
-	let response = await fetch(link, {
-		method: 'POST',
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/x-www-form-urlencoded',
+    var bodies = ""
+    for (var i = 0; i < params.length; i++) {
+        bodies += '&' + params[i][0] + '=' + (params[i][1] === "" ? "" : params[i][1])
 
-		},
+    }
+    if (bodies.length > 2) bodies = bodies.substring(1);
+    if (logs) log('Bodies', bodies);
+    const link = nodeServerSite + servicename + "/"
+    if (logs) log('link', link);
+    if (logs) log('full path', link + '?' + bodies);
+    let response = await fetch(link, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'authorization': Token
 
-		body: bodies
-	})
-	let data = response.json()
-	if (log) log('Data' , data);
-	return data;
+        },
+
+        body: bodies
+    })
+    let data = response.json()
+    if (logs) log('Data', data);
+    return data;
 }
+export async function getdatawithresponse(servicename, params, Token = '', logs = false) {
+    //how to use it
+    //var deetee = await G.getdatawithWait( 'getlogin', [['username', 'roucoz'], ['password', 'cl@r@']], true);
+
+    var bodies = ""
+    for (var i = 0; i < params.length; i++) {
+        bodies += '&' + params[i][0] + '=' + (params[i][1] === "" ? "" : params[i][1])
+
+    }
+    if (bodies.length > 2) bodies = bodies.substring(1);
+    if (logs) log('Bodies', bodies);
+    const link = nodeServerSite + servicename + "/"
+    if (logs) log('link', link);
+    if (logs) log('full path', link + '?' + bodies);
+    let data = [];
+    let status = ''
+    await fetch(link, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'authorization': Token
+
+        },
+
+        body: bodies
+    }).then(response =>
+        response.json().then(data => ({
+            data: data,
+            status: response.status
+        })
+        )
+    )
+    return { status: status, data: data };
+}
+
+
 //#endregion 
- 
+
+
+
+//#region RenderComponent
+export const renderTextField = (name, type, placeHolder, onChange, valueField, errorArray) => {
+    var key = name.replace(" ", "").toLowerCase();
+    return (
+        <Form.Group className='fullWidth '>
+            <Form.Label htmlFor={key} >{name}</Form.Label>
+            <Form.Control style={errorArray[key] ? { borderColor: errorColor } : {}} name={key} type={type} placeholder={placeHolder} onChange={onChange} value={valueField[key] || ''} />
+            {errorArray[key] && <div className='remarks notValidColor'>{errorArray[key]}</div>}
+        </Form.Group>
+    )
+}
+//#endregion

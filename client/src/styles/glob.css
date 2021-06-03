@@ -3,21 +3,21 @@
 
 
 :root {
-    --priCol: #4a4a4a;
+    --priCol: #88b3ee;
+    --priColLight: #b4cff5;
     --accCol: #2a98bb;
     --fontcolor: #101010;
     --fontcolorLight1: gray;
     --fontfamily: 'Asap';
-    --headerHeight: 800px;
     --basicFontSize: 1.2rem;
-    --ezCol: rgb(109,72,121);
-    --ezColLight: rgb(177,128,194);
-    --errorColor : #ea0505
+    --offWhite: #f6f1f1;
+    --errorColor: #ea0505
 }
 /*#region Default App and Header Tab */
 .App {
-    color: var(--priCol);
+    color: var(--fontcolor);
     font-family: var(--fontfamily);
+    background-color: white
 }
 
 /*#endregion */
@@ -77,7 +77,11 @@
 }
 
 .primcolor {
-    color: var(--ezCol)
+    color: var(--priCol)
+}
+
+.notValidColor {
+    color: #ea0505
 }
 
 .remarks {
@@ -96,6 +100,32 @@
 
 
 /*#endregion */
+
+/*#region Distinct*/
+/*#region Layout*/
+.fullWidth {
+    width: 100%;
+}
+
+.boxShadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.warningBorder {
+    border-color:var(--errorColor)
+}
+.warningColor {
+    color:var(--errorColor)
+}
+/*#endregion*/
+/*#region Mouse*/
+.handCursor {
+    cursor:pointer;
+}
+/*#endregion*/
+/*#endregion*/
+
+
+
 /*#region Media Screens*/
 /*Min-width: 320px (smaller phone viewpoints)
 Min-width: 480px (small devices and most phones)
@@ -216,16 +246,18 @@ Min-width: 1200px (large devices and wide screens)
 
 
 
-
+.redSVG {
+    filter: invert(10%) sepia(94%) saturate(7152%) hue-rotate(10deg) brightness(94%) contrast(110%);
+}
 .whitesvg {
-    width: 30px;
-    height: 20px;
-    cursor: pointer;
     filter: invert(100%) sepia(0%) saturate(4515%) hue-rotate(83deg) brightness(123%) contrast(110%);
 }
 
 
 /*#endregion*/
+
+
+
 /*#region Components*/
 
 
@@ -233,6 +265,10 @@ Min-width: 1200px (large devices and wide screens)
     display: flex;
     flex-direction: row;
 }
+
+    .flexrow.center {
+        justify-content: center
+    }
 
     .flexrow.spacearround {
         justify-content: space-around
@@ -262,15 +298,17 @@ Min-width: 1200px (large devices and wide screens)
 .Card {
     padding: 1em;
     background-color: white;
-    border-radius: 10px;
-    color: black
+    border-radius: 20px;
 }
+    .Card.bigRound {
+        border-radius:40px
+    }
 
 .circleImage {
     background-color: white;
     border-style: solid;
     border-width: 3px;
-    border-color: var(--ezCol);
+    border-color: var(--priCol);
     border-radius: 100%;
     object-fit: contain;
     width: 64px;
@@ -279,28 +317,15 @@ Min-width: 1200px (large devices and wide screens)
 }
 /*#endregion*/
 
-/*#region form Controls*/
-.formGroup {
-    padding-bottom: 5px;
-    padding-top: 5px;
-    margin-bottom: 15px
-}
-.inputTextError {
-    border-color:var(--errorColor)
-}
-.formValidation {
-    color: var(--errorColor)
-}
-/*#endregion*/
 
 
 /*#region Debug */
 .cprim {
-    background-color: var(--ezCol)
+    background-color: var(--priCol)
 }
 
 .cprimlight {
-    background-color: var(--ezColLight)
+    background-color: var(--priColLight)
 }
 
 .cr {

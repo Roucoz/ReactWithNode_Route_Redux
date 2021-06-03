@@ -4,7 +4,7 @@ import * as G from '../components/global';
 export const PrivateRoute = ({ component: Component, ...rest }) => (
 	
 	<Route {...rest} render={props => (
-		sessionStorage.getItem(G.sessionStorageVariables.userData.name !== '')?	
+		sessionStorage.getItem(G.sessionStorageVariables.userData.Token !== '')?	
 			<Component {...props} /> :
 			<Redirect to={{ pathname: '/SignIn', state: { from: props.location } }} />
             

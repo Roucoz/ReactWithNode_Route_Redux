@@ -13,21 +13,11 @@ class mainContent extends Component {
 	}
 	render() {
 		return (
-			<div className=''>
-				<button onClick={() => {sessionStorage.removeItem(G.sessionStorageVariables.userData) }}>Log Out</button>	
-				Welcome Roucozs
-				<div>Welcome Roucoz </div>
-				<div>Welcome Roucoz </div>
-				<div>Welcome Roucoz </div>
-				<div>Welcome Roucoz </div>
-				<div>Welcome Roucoz </div>
-				<div>Welcome Roucoz </div>
-				<div>Welcome Roucoz </div>
-				<div>Welcome Roucoz </div>
-				<div>Welcome Roucoz </div>
-				<div>Welcome Roucoz </div>
-				<div>Welcome Roucoz </div>
-				<div>Welcome Roucoz </div>
+			<div className='cr fullWidth'>
+                
+
+                <button onClick={() => { sessionStorage.removeItem(G.sessionStorageVariables.userData) }}>Log Out</button>	
+				
 
 			</div>
 		)
