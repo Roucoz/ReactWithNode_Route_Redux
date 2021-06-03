@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import { Container, Row } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import './styles/glob.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,8 +12,7 @@ import RegistrationRequest from './pages/regitrationRequest';
 import RegisterNewuser from './pages/registerNewuser';
 import ListAllUsers from './pages/listAllUsers';
 import NotFound from './pages/NotFound';
-import { PrivateRoute } from './pages/privateRoute';
-import * as G from './components/global';
+
 
 
 

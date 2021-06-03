@@ -1,7 +1,6 @@
 import '../styles/glob.css';
-import { Form, Image } from 'react-bootstrap';
-
-
+import { Form } from 'react-bootstrap';
+import { resetWarningCache } from 'prop-types';
 
 const nodeServerSite = 'http://localhost:5000/';
 
@@ -10,8 +9,7 @@ const nodeServerSite = 'http://localhost:5000/';
 export const userType = ['Mall Admin', 'Super User', 'Customer']
 export const sessionStorageVariables = { userData: 'UserData' }
 export const errorColor = '#ea0505'
-//#end region
-
+//#endregion
 
 //#region Distinct Functions
 export const log = (a, b) => {
@@ -36,9 +34,6 @@ export const checkUserAccess = () => {
 //#region getData 
 
 export async function getdatawithWait(servicename, params, Token = '', logs = false) {
-    //how to use it
-    //var deetee = await G.getdatawithWait( 'getlogin', [['username', 'roucoz'], ['password', 'cl@r@']], true);
-
     var bodies = ""
     for (var i = 0; i < params.length; i++) {
         bodies += '&' + params[i][0] + '=' + (params[i][1] === "" ? "" : params[i][1])
@@ -60,14 +55,12 @@ export async function getdatawithWait(servicename, params, Token = '', logs = fa
 
         body: bodies
     })
-    let data = response.json()
+	let data = response.json()
+	let status = response.status;
     if (logs) log('Data', data);
     return data;
 }
-export async function getdatawithresponse(servicename, params, Token = '', logs = false) {
-    //how to use it
-    //var deetee = await G.getdatawithWait( 'getlogin', [['username', 'roucoz'], ['password', 'cl@r@']], true);
-
+export async function getData(servicename, params, Token = '', logs = false) {
     var bodies = ""
     for (var i = 0; i < params.length; i++) {
         bodies += '&' + params[i][0] + '=' + (params[i][1] === "" ? "" : params[i][1])
@@ -78,26 +71,24 @@ export async function getdatawithresponse(servicename, params, Token = '', logs 
     const link = nodeServerSite + servicename + "/"
     if (logs) log('link', link);
     if (logs) log('full path', link + '?' + bodies);
-    let data = [];
-    let status = ''
-    await fetch(link, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'authorization': Token
+    
+    
+	let response = await fetch(link, {
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'authorization': Token
 
-        },
+		},
 
-        body: bodies
-    }).then(response =>
-        response.json().then(data => ({
-            data: data,
-            status: response.status
-        })
-        )
-    )
-    return { status: status, data: data };
+		body: bodies
+	})
+	let data = response.json()
+	let status = response.status;
+	if (logs) log('Data', data);
+	
+	return {data,status};
 }
 
 

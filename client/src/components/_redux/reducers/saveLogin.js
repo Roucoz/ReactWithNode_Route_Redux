@@ -1,6 +1,3 @@
-import { _reducersActions as _RA } from '../constants';
-
-
 const initialState = {
 	userData: {}
 }
