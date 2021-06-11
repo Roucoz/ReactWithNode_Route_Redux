@@ -1,88 +1,338 @@
-import React, { Component, Fragment } from "react";
-import moment from 'moment';
+import React from "react";
+import moment from "moment";
+//import { range } from "moment-range";
 
+export default class Calendar extends React.Component {
 
-const weekdayshort = moment.weekdaysShort();
+    state = {
+        showCalendarTable: true,
+        showMonthTable: false,
+        dateObject: moment(),
+        allmonths: moment.months(),
+        showYearNav: false,
+        selectedDay: null
+    };
 
-class Calendar extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            dateObject: moment()
-        };
+    //#region Distinct Get Functions
+    weekdayshort = moment.weekdaysShort();
+    daysInMonth = () => {
+        return this.state.dateObject.daysInMonth();
+    };
+    year = () => {
+        return this.state.dateObject.format("Y");
+    };
+    currentDay = () => {
+        return this.state.dateObject.format("D");
+    };
+    month = () => {
+        return this.state.dateObject.format("MMMM");
+    };
+    getDates(startDate, stopDate) {
+        var dateArray = [];
+        var currentDate = moment(startDate);
+        var stopDate = moment(stopDate);
+        while (currentDate <= stopDate) {
+            dateArray.push(moment(currentDate).format("YYYY"));
+            currentDate = moment(currentDate).add(1, "year");
+        }
+        return dateArray;
     }
-    weekdayshortname = () => {
-        return (<div>{weekdayshort.map(day => {
-            return (
-                <th key={day} className="primcolor p-1 ">
-                    {day}
-                </th>
-            )
-        })}</div>
-        )
-    }
+    firstDayOfMonth = () => {
+        let dateObject = this.state.dateObject;
+        let firstDay = moment(dateObject)
+            .startOf("month")
+            .format("d"); // Day of week 0...1..5...6
+        return firstDay;
+    };
+
+
+    //#endregion
+
+    //#region Year & Month Table
+    //#region year Month Visibility
+    showMonth = (e, month) => {
+        this.setState({
+            showMonthTable: !this.state.showMonthTable,
+            showCalendarTable: !this.state.showCalendarTable
+        });
+    };
+    showYearEditor = () => {
+        this.setState({
+            showYearNav: true,
+            showCalendarTable: !this.state.showCalendarTable
+        });
+    };
+    //#endregion
+    //#region Month List & Year Table
+    MonthList = props => {
+        let months = [];
+        props.data.map(data => {
+            months.push(
+                <td
+                    key={data}
+                    className="calendar-month"
+                    onClick={e => {
+                        this.setMonth(data);
+                    }}
+                >
+                    <span>{data}</span>
+                </td>
+            );
+        });
+        let rows = [];
+        let cells = [];
+
+        months.forEach((row, i) => {
+            if (i % 3 !== 0 || i == 0) {
+                cells.push(row);
+            } else {
+                rows.push(cells);
+                cells = [];
+                cells.push(row);
+            }
+        });
+        rows.push(cells);
+        let monthlist = rows.map((d, i) => {
+            return <tr>{d}</tr>;
+        });
+
+        return (
+            <table className="calendar-month">
+                <thead>
+                    <tr>
+                        <th colSpan="4">Select a Month</th>
+                    </tr>
+                </thead>
+                <tbody>{monthlist}</tbody>
+            </table>
+        );
+    };
+    YearTable = props => {
+        let months = [];
+        let nextten = moment()
+            .set("year", props)
+            .add("year", 12)
+            .format("Y");
+
+        let tenyear = this.getDates(props, nextten);
+
+        tenyear.map(data => {
+            months.push(
+                <td
+                    key={data}
+                    className="calendar-month"
+                    onClick={e => {
+                        this.setYear(data);
+                    }}
+                >
+                    <span>{data}</span>
+                </td>
+            );
+        });
+        let rows = [];
+        let cells = [];
+
+        months.forEach((row, i) => {
+            if (i % 3 !== 0 || i == 0) {
+                cells.push(row);
+            } else {
+                rows.push(cells);
+                cells = [];
+                cells.push(row);
+            }
+        });
+        rows.push(cells);
+        let yearlist = rows.map((d, i) => {
+            return <tr>{d}</tr>;
+        });
+
+        return (
+            <table className="calendar-month">
+                <thead>
+                    <tr>
+                        <th colSpan="4">Select a Yeah</th>
+                    </tr>
+                </thead>
+                <tbody>{yearlist}</tbody>
+            </table>
+        );
+    };
+    //#endregion
+    //#region Set Year& Month Functions
+    setMonth = month => {
+        let monthNo = this.state.allmonths.indexOf(month);
+        let dateObject = Object.assign({}, this.state.dateObject);
+        dateObject = moment(dateObject).set("month", monthNo);
+        this.setState({
+            dateObject: dateObject,
+            showMonthTable: !this.state.showMonthTable,
+            showCalendarTable: !this.state.showCalendarTable
+        });
+    };
+    setYear = year => {
+        // alert(year)
+        let dateObject = Object.assign({}, this.state.dateObject);
+        dateObject = moment(dateObject).set("year", year);
+        this.setState({
+            dateObject: dateObject,
+            showMonthTable: !this.state.showMonthTable,
+            showYearNav: !this.state.showYearNav,
+            showMonthTable: !this.state.showMonthTable
+        });
+    };
+    //#endregion
+
+    //#endregion
+
+
+    //#region Triggers prev,next,yearchage,dayclick
+    onPrev = () => {
+        let curr = "";
+        if (this.state.showMonthTable == true) {
+            curr = "year";
+        } else {
+            curr = "month";
+        }
+        this.setState({
+            dateObject: this.state.dateObject.subtract(1, curr)
+        });
+    };
+    onNext = () => {
+        let curr = "";
+        if (this.state.showMonthTable == true) {
+            curr = "year";
+        } else {
+            curr = "month";
+        }
+        this.setState({
+            dateObject: this.state.dateObject.add(1, curr)
+        });
+    };
+    onYearChange = e => {
+        this.setYear(e.target.value);
+    };
+    onDayClick = (e, d) => {
+        this.setState(
+            {
+                selectedDay: d
+            },
+            () => {
+                console.log("SELECTED DAY: ", this.state.selectedDay);
+            }
+        );
+    };
+    //#endregion
+
+
 
     render() {
-        const firstDayOfMonth = () => {
-            let dateObject = this.state.dateObject;
-            let firstDay = moment(dateObject)
-                .startOf("month")
-                .format("d");
-            return firstDay;
-        };
-
+        //#region Generate WeekDays
+        let weekdayshortname = this.weekdayshort.map(day => {
+            return <th key={day}>{day}</th>;
+        });
+        //#endregion
+        //#region Generate The Blanks
         let blanks = [];
-        for (let i = 0; i < firstDayOfMonth(); i++) {
-            blanks.push(
-                <td className="calendar-day empty">{""}</td>
-            );
+        for (let i = 0; i < this.firstDayOfMonth(); i++) {
+            blanks.push(<td className="calendar-day empty">{""}</td>);
         }
+        //#endregion
+        //#region Days in month Generation
         let daysInMonth = [];
-        for (let d = 1; d <= daysInMonth(); d++) {
+        for (let d = 1; d <= this.daysInMonth(); d++) {
+            let currentDay = d == this.currentDay() ? "today" : "";
+            // let selectedClass = (d == this.state.selectedDay ? " selected-day " : "")
             daysInMonth.push(
-                <td key={d} className="calendar-day">
-                    {d}
+                <td key={d} className={`calendar-day ${currentDay}`}>
+                    <span
+                        onClick={e => {
+                            this.onDayClick(e, d);
+                        }}
+                    >
+                        {d}
+                    </span>
                 </td>
             );
         }
         var totalSlots = [...blanks, ...daysInMonth];
         let rows = [];
         let cells = [];
+
         totalSlots.forEach((row, i) => {
             if (i % 7 !== 0) {
-                cells.push(row); // if index not equal 7 that means not go to next week
+                cells.push(row);
             } else {
-                rows.push(cells); // when reach next week we contain all td in last week to rows 
-                cells = []; // empty container 
-                cells.push(row); // in current loop we still push current row to new container
+                rows.push(cells);
+                cells = [];
+                cells.push(row);
             }
-            if (i === totalSlots.length - 1) { // when end loop we add remain date
+            if (i === totalSlots.length - 1) {
+                // let insertRow = cells.slice();
                 rows.push(cells);
             }
         });
+
         let daysinmonth = rows.map((d, i) => {
             return <tr>{d}</tr>;
         });
+        //#endregion
         return (
-            
-            <div className='fullwidth'>
-                {console.log(weekdayshort)}
-                <h2>Calendar</h2>
-                {
-                    <table className="calendar-day">
-                        <thead>
-                            <tr>{this.weekdayshortname}</tr>
-                        </thead>
-                        <tbody>{daysinmonth}</tbody>
-                    </table>
-                    
-                }
+            <div className="tail-datetime-calendar">
+                {/*--Navigation--*/}
+                <div className="calendar-navi">
+                    <span
+                        onClick={e => {
+                            this.onPrev();
+                        }}
+                        class="calendar-button button-prev"
+                    />
+                    {!this.state.showMonthTable && !this.state.showYearEditor && (
+                        <span
+                            onClick={e => {
+                                this.showMonth();
+                            }}
+                            class="calendar-label"
+                        >
+                            {this.month()},
+            </span>
+                    )}
+                    <span
+                        className="calendar-label"
+                        onClick={e => {
+                            this.showYearEditor();
+                        }}
+                    >
+                        {this.year()}
+                    </span>
+
+                    <span
+                        onClick={e => {
+                            this.onNext();
+                        }}
+                        className="calendar-button button-next"
+                    />
+                </div>
+
+                {/*--Year/Month Tables--*/}
+                <div className="calendar-date">
+                    {this.state.showYearNav && <this.YearTable props={this.year()} />}
+                    {this.state.showMonthTable && (
+                        <this.MonthList data={moment.months()} />
+                    )}
+                </div>
+
+                {/*--Days Table--*/}
+                {this.state.showCalendarTable && (
+                    <div className="calendar-date">
+                        <table className="calendar-day">
+                            <thead>
+                                <tr>{weekdayshortname}</tr>
+                            </thead>
+                            <tbody>{daysinmonth}</tbody>
+                        </table>
+                    </div>
+                )}
             </div>
-
-        )
+        );
     }
-
 }
-
-
-export default Calendar;

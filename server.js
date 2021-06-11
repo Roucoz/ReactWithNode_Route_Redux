@@ -17,12 +17,19 @@ app.use(function (req, res, next) {
 //#region SQL server 
 var sql = require("mssql");
 // config for your database
+//const config = {
+//	user: 'sa',
+//	password: 'P@ssw0rd',
+//	server: '192.168.2.228',
+//	database: 'mallbegium',
+//	trustServerCertificate: true
+//};
 const config = {
-	user: 'sa',
-	password: 'P@ssw0rd',
-	server: '192.168.2.228',
-	database: 'mallbegium',
-	trustServerCertificate: true
+    user: 'sa',
+    password: 'RimP@ssw0rd',
+    server: 'rim-databases',
+    database: 'roucozdb',
+    trustServerCertificate: true
 };
 const getDataFromSQLServer = (str, res) => {
 	sql.connect(config, function (err) {
@@ -151,6 +158,12 @@ app.post('/SignIn', function (req, res) {   //create web server
 
 		getDataFromSQLServer(str, res)
 	} catch (err) { logThis('Error Appeared in Post SignIn', err) }
+})
+
+app.get('/userReceiveEmail', function (req, res) {   //create web server
+    try {
+        getDataFromSQLServer("insert into userReceiveEmail values ('this the email body') ", res)
+    } catch (err) { logThis('Error Appeared in Post SignIn', err) }
 })
 //#endregion
 
